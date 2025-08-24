@@ -1,5 +1,6 @@
 package org.example.controller;
 
+import org.example.Container;
 import org.example.vo.Motivation;
 import org.example.vo.Rq;
 
@@ -7,19 +8,14 @@ import java.util.*;
 
 public class MotivationController {
 
-    private Scanner sc;
     private int lastId = 0;
     private List<Motivation> motivationList = new ArrayList<>();
 
-    public MotivationController(Scanner sc) {
-        this.sc = sc;
-    }
-
     public void add() {
         System.out.print("명언 : ");
-        String body = sc.nextLine().trim();
+        String body = Container.getScanner().nextLine().trim();
         System.out.print("저자 : ");
-        String author = sc.nextLine().trim();
+        String author = Container.getScanner().nextLine().trim();
         ++lastId;
 
         Motivation addMotiv = new Motivation(lastId, body, author);
@@ -107,7 +103,7 @@ public class MotivationController {
 
         Motivation foundMotivation = null;
         for (Motivation m : motivationList) {
-            if(m.getId() == id){
+            if (m.getId() == id) {
                 foundMotivation = m;
                 break;
             }

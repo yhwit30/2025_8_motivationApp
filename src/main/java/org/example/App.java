@@ -3,24 +3,16 @@ package org.example;
 import org.example.controller.MotivationController;
 import org.example.system.SystemController;
 
-import java.util.Scanner;
-
 public class App {
-
-    private Scanner sc;
-
-    public App(Scanner sc) {
-        this.sc = sc;
-    }
 
     public void run() {
         SystemController systemController = new SystemController();
-        MotivationController motivationController = new MotivationController(sc);
+        MotivationController motivationController = new MotivationController();
 
         System.out.println("== 명언 앱 ==");
         while (true) {
             System.out.print("명령어) ");
-            String cmd = sc.nextLine().trim();
+            String cmd = Container.getScanner().nextLine().trim();
 
             if (cmd.equals("exit")) {
                 systemController.exit();
@@ -29,11 +21,10 @@ public class App {
                 motivationController.add();
             } else if (cmd.equals("list")) {
                 motivationController.list();
-            } else if (cmd.startsWith("delete")){
+            } else if (cmd.startsWith("delete")) {
 //                motivationController.delete(cmd);
                 motivationController.newDelete(cmd);
-            }
-            else {
+            } else {
                 System.out.println("사용할 수 없는 명령어입니다.");
             }
 
