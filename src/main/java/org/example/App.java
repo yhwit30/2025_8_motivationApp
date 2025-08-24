@@ -54,7 +54,12 @@ public class App {
 
                     Collections.reverse(motivationList);
                     for (Motivation m : motivationList) {
-                        System.out.println(m.getId() + "           " + m.getBody().substring(0, 5) + " ..." + "             " + m.getAuthor());
+                        if(m.getBody().length() < 5){
+                            System.out.println(m.getId() + "           " + m.getBody() + "             " + m.getAuthor());
+                        } else {
+                            System.out.println(m.getId() + "           " + m.getBody().substring(0, 5) + " ..." + "             " + m.getAuthor());
+                        }
+
                     }
                 }
 
