@@ -51,4 +51,22 @@ public class MotivationController {
             }
         }
     }
+
+    public void delete(String cmd) {
+
+        int id = Integer.parseInt(cmd.split(" ")[1]);
+
+        int foundIndex = -1;
+        Motivation m = null;
+        for (int i = 0; i < motivationList.size(); i++){
+            m = motivationList.get(i);
+            if (m.getId() == id){
+                System.out.println(m.toString());
+                foundIndex = i;
+            }
+        }
+        motivationList.remove(foundIndex);
+        System.out.println(id + "번 글이 삭제되었습니다.");
+
+    }
 }

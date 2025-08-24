@@ -2,9 +2,8 @@ package org.example;
 
 import org.example.controller.MotivationController;
 import org.example.system.SystemController;
-import org.example.vo.Motivation;
 
-import java.util.*;
+import java.util.Scanner;
 
 public class App {
 
@@ -30,7 +29,10 @@ public class App {
                 motivationController.add();
             } else if (cmd.equals("list")) {
                 motivationController.list();
-            } else {
+            } else if (cmd.startsWith("delete")){
+                motivationController.delete(cmd);
+            }
+            else {
                 System.out.println("사용할 수 없는 명령어입니다.");
             }
 
