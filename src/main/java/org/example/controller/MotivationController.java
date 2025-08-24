@@ -1,6 +1,7 @@
 package org.example.controller;
 
 import org.example.vo.Motivation;
+import org.example.vo.Rq;
 
 import java.util.*;
 
@@ -51,18 +52,18 @@ public class MotivationController {
 
     public void delete(String cmd) {
 
-        if (cmd.split(" ").length > 2){
+        if (cmd.split(" ").length > 2) {
             System.out.println("delete 뒤에는 숫자 하나만 입력가능합니다.");
             return;
         }
 
         int id = -1;
-        try{
+        try {
             id = Integer.parseInt(cmd.split(" ")[1]);
-        } catch (NumberFormatException e){
+        } catch (NumberFormatException e) {
             System.out.println("delete 뒤에는 숫자만 입력가능합니다.");
             return;
-        } catch (ArrayIndexOutOfBoundsException e){
+        } catch (ArrayIndexOutOfBoundsException e) {
             System.out.println("delete 한칸 띄고 숫자 입력하십시오.");
             return;
         }
@@ -77,7 +78,9 @@ public class MotivationController {
             }
         }
 
-        if(foundMotivation == null){
+        System.out.println("foundMotiv : " + foundMotivation.toString());
+
+        if (foundMotivation == null) {
             System.out.println(id + "번 글은 없습니다");
             return;
         }
@@ -85,24 +88,22 @@ public class MotivationController {
         System.out.println(id + "번 글이 삭제되었습니다.");
     }
 
-    public void newDelete(String cmd){
+    public void newDelete(String cmd) {
 
-        String[] cmdBits = cmd.split("\\?"); // 예) "delete" 와 "id=1"
+        Rq rq = new Rq(cmd);
 
-        String actionMethod = cmdBits[0]; // "delete"
-
-        String[] paramBits = cmdBits[1].split("="); // 예) "id" 와 "1"
-
-        Map<String, String> params = new HashMap<>();
-        String key = paramBits[0];
-        String value = paramBits[1];
-        params.put(key, value);
-
-        System.out.println("actionMethod : " + actionMethod);
-        System.out.println("paramBits : " + paramBits[0] + paramBits[1]);
-        System.out.println("params : " + params);
-
-        int id = Integer.parseInt(params.get("id"));
+        if (rq.getParams().get("id") == null) {
+            System.out.println("delete?id=값 형식으로 작성하십시오.");
+            return;
+        }
+        int id = -1;
+        try {
+            id = Integer.parseInt(rq.getParams().get("id"));
+        } catch (NumberFormatException e) {
+            System.out.println("id=숫자 여야 합니다.");
+            return;
+        }
+        System.out.println("id : " + id);
 
         int foundIndex = -1;
         Motivation foundMotivation = null;
@@ -114,7 +115,7 @@ public class MotivationController {
             }
         }
 
-        if(foundMotivation == null){
+        if (foundMotivation == null) {
             System.out.println(id + "번 글은 없습니다");
             return;
         }
