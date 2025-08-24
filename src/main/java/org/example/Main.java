@@ -11,10 +11,5 @@ public class Main {
 
         sc.close();
 
-        // git test1
-        System.out.println("깃 테스트1");
-        // git test2
-        System.out.println("깃 테스트2");
-
     }
 }
