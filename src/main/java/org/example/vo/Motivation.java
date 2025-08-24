@@ -1,4 +1,4 @@
-package vo;
+package org.example.vo;
 
 public class Motivation {
 
