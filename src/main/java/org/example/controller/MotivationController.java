@@ -105,21 +105,21 @@ public class MotivationController {
         }
         System.out.println("id : " + id);
 
-        int foundIndex = -1;
         Motivation foundMotivation = null;
-        for (int i = 0; i < motivationList.size(); i++) {
-            foundMotivation = motivationList.get(i);
-            if (foundMotivation.getId() == id) {
-                System.out.println(foundMotivation.toString());
-                foundIndex = i;
+        for (Motivation m : motivationList) {
+            if(m.getId() == id){
+                foundMotivation = m;
+                break;
             }
         }
+
+        System.out.println("foundMotivation : " + foundMotivation);
 
         if (foundMotivation == null) {
             System.out.println(id + "번 글은 없습니다");
             return;
         }
-        motivationList.remove(foundIndex);
+        motivationList.remove(foundMotivation);
         System.out.println(id + "번 글이 삭제되었습니다.");
 
 
